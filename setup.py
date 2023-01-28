@@ -3,7 +3,7 @@ import platform
 
 
 def installLib() -> None:
-    system = platform.system()
+    system: str = platform.system()
     try:
         if "Linux" in system:
             return os.system("pip3 install -r requirements.txt")
