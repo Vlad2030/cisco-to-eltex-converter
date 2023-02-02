@@ -7,15 +7,15 @@ ELTEX_SYNTAX_FILE: object = "/eltex/commands.json"
 
 
 class Json:
-    async def dump(data: str) -> str:
+    async def dump(data: dict) -> json.JSONDecoder:
         return json.dump(data)
     
 
-    async def load(data: str) -> str:
+    async def load(data: str) -> json.JSONDecoder:
         return json.load(data)
     
 
-    async def loads(data: str) -> str:
+    async def loads(data: str) -> json.JSONDecoder:
         return json.loads(data)
 
 

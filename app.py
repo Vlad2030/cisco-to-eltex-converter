@@ -1,27 +1,16 @@
 from backend.api import convert_commands
-from frontend import site
-from fastapi import FastAPI
-from pydantic import BaseModel
+from frontend import web_page
+from asgiref.wsgi import WsgiToAsgi
+from flask import Flask
+from flask import render_template
 from loguru import logger
 
 
-app = FastAPI()
+app = Flask(__name__)
+asgi_app = WsgiToAsgi(app)
 
 
-class Syntax(BaseModel):
-    syntax_code: str
-
-
-@app.on_event("startup")
-async def startup():
-    return logger.info("WebApp Started")
-
-
-@app.on_event("shutdown")
-async def shutdown():
-    return logger.warning("WebApp Shutdown")
-
-
-@app.get("/api/transform/{syntax_code}")
-async def transform(syntax_code: str):
-    pass
+if __name__ == "__main__":
+    @app.route("/cisco-to-eltex-convecter")
+    async def cisco_to_eltex_page() -> None:
+        return render_template('/frontend/web_page/cisco-to-eltex.html')
